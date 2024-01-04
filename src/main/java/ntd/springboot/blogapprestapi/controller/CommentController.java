@@ -1,5 +1,6 @@
 package ntd.springboot.blogapprestapi.controller;
 
+import jakarta.validation.Valid;
 import ntd.springboot.blogapprestapi.model.payload.CommentDto;
 import ntd.springboot.blogapprestapi.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class CommentController {
 
     @PostMapping("posts/{postId}/comments")
     public ResponseEntity<CommentDto> createComment(@PathVariable(name = "postId") long postId,
-                                                    @RequestBody CommentDto commentDto){
+                                                    @Valid @RequestBody CommentDto commentDto){
         return new ResponseEntity<>(commentService.createComment(postId, commentDto), HttpStatus.CREATED);
     }
 
@@ -39,7 +40,7 @@ public class CommentController {
     @PutMapping("posts/{postId}/comments/{commentId}")
     public  ResponseEntity<CommentDto> updateComment(@PathVariable(name = "postId") long postId,
                                                      @PathVariable(name = "commentId") long commentId,
-                                                     @RequestBody CommentDto commentDto){
+                                                     @Valid @RequestBody CommentDto commentDto){
         return new ResponseEntity<>(commentService.updateComment(postId, commentId, commentDto), HttpStatus.OK);
     }
 

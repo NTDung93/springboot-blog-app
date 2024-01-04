@@ -1,5 +1,6 @@
 package ntd.springboot.blogapprestapi.controller;
 
+import jakarta.validation.Valid;
 import ntd.springboot.blogapprestapi.model.payload.PostDto;
 import ntd.springboot.blogapprestapi.model.payload.PostResponse;
 import ntd.springboot.blogapprestapi.service.PostService;
@@ -22,7 +23,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto) {
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
     }
 
@@ -42,7 +43,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable(name = "id") long id){
+    public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable(name = "id") long id){
         return ResponseEntity.ok(postService.updatePost(postDto, id));
     }
 
