@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class BlogApiException extends RuntimeException{
     @Getter
     private HttpStatus status;
+
+    @Getter
     private String message;
 
     public BlogApiException(HttpStatus status, String message) {
@@ -19,10 +21,5 @@ public class BlogApiException extends RuntimeException{
         super(message);
         this.status = status;
         this.message = message1;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 }
